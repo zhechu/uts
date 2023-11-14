@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yly.uts.dao.UtsTagDao">
+
+	<resultMap id="UtsTag" type="com.yly.uts.core.model.UtsTag" >
+		<result column="id" property="id" />
+		<result column="tag_name" property="tagName" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id,
+		t.tag_name
+	</sql>
+
+	<!-- 批量添加，有冲突则跳过 -->
+	<insert id="batchSave" parameterType="java.util.List">
+		insert IGNORE into uts_tag (
+			tag_name
+		) values
+		<foreach collection="list" item="model" index="index" separator=",">
+			(#{model.tagName})
+		</foreach>
+	</insert>
+
+	<select id="listByTagNames" resultMap="UtsTag">
+		SELECT <include refid="Base_Column_List" />
+		FROM uts_tag AS t
+		WHERE t.tag_name in
+		<foreach collection="list" item="tagName" index="index" separator=",">
+			(#{tagName})
+		</foreach>
+	</select>
+
+</mapper>

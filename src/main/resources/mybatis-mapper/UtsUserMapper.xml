@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yly.uts.dao.UtsUserDao">
+
+	<resultMap id="UtsUser" type="com.yly.uts.core.model.UtsUser" >
+		<result column="id" property="id" />
+		<result column="user_name" property="userName" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		t.id,
+		t.user_name
+	</sql>
+
+	<select id="pageList" parameterType="java.util.HashMap" resultMap="UtsUser">
+		SELECT <include refid="Base_Column_List" />
+		FROM uts_user AS t
+		ORDER BY id ASC
+		LIMIT #{offset}, #{pagesize}
+	</select>
+
+</mapper>
