@@ -15,17 +15,30 @@ public class UtsUserTagServiceTest {
     private UtsUserTagService utsUserTagService;
 
     @Test
-    public void updateUserTag() {
+    public void updateUserTag() throws InterruptedException {
+        for (int i = 0; i < 100; i++) {
+            new Thread() {
+                @Override
+                public void run() {
+                    updateUserTagDetail();
+                }
+            }.start();
+        }
+        Thread.sleep(1000_000);
+    }
+
+    private void updateUserTagDetail() {
         List<Integer> userIds = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
+        for (int i = 8000; i < 9000; i++) {
             userIds.add(i);
         }
         List<String> addTags = new ArrayList<>();
-        addTags.add("女性");
-        addTags.add("活跃");
+        addTags.add("玉儿");
+        addTags.add("月儿");
+        addTags.add("活三跃");
         List<String> removeTags = new ArrayList<>();
-        removeTags.add("广东");
-        removeTags.add("沿海");
+        removeTags.add("洱东海");
+        removeTags.add("山东");
         utsUserTagService.updateUserTag(userIds, addTags, removeTags);
     }
 

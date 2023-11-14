@@ -15,7 +15,7 @@
 
 	<!-- 批量添加，有冲突则跳过 -->
 	<insert id="batchSave" parameterType="java.util.List">
-		insert IGNORE into uts_tag (
+		insert into uts_tag (
 			tag_name
 		) values
 		<foreach collection="list" item="model" index="index" separator=",">
