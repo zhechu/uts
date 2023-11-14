@@ -1,6 +1,7 @@
 package com.yly.uts.service.impl;
 
 import com.yly.uts.core.model.UtsTag;
+import com.yly.uts.core.model.UtsUser;
 import com.yly.uts.core.model.UtsUserTag;
 import com.yly.uts.dao.UtsTagDao;
 import com.yly.uts.dao.UtsUserTagDao;
@@ -52,7 +53,10 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 			utsTagDao.batchSave(tags);
 		}
 
+		// 批量添加用户标签，若已存在，则跳过
 		addUserTag(userIds, addTags);
+
+		// 批量移除用户标签
 		removeUserTag(userIds, removeTags);
 
 		return userIds.size();
@@ -74,7 +78,6 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 			return 0;
 		}
 
-		// 批量添加用户标签，若已存在，则跳过
 		return utsUserTagDao.batchSave(utsUserTags);
 	}
 
@@ -94,9 +97,9 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 			return 0;
 		}
 
-		// 批量移除用户标签
 		return utsUserTagDao.batchDelete(utsUserTags);
 	}
+
 
 	private List<UtsUserTag> getUtsUserTags(List<Integer> userIds, List<UtsTag> utsTags) {
 		List<UtsUserTag> utsUserTags = new ArrayList<>(userIds.size() * utsTags.size());

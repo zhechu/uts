@@ -14,10 +14,40 @@
 	</sql>
 
 	<select id="pageList" parameterType="java.util.HashMap" resultMap="UtsUser">
-		SELECT <include refid="Base_Column_List" />
-		FROM uts_user AS t
-		ORDER BY id ASC
-		LIMIT #{offset}, #{pagesize}
+		select DISTINCT * from (
+			select
+				u.*,
+				t.tag_name,
+				(
+					select GROUP_CONCAT(DISTINCT tt.tag_name ORDER BY tt.tag_name ASC SEPARATOR ',')
+					from uts_tag tt left join uts_user_tag utt on tt.id = utt.tag_id
+					where utt.user_id = u.id
+				) tag_names
+			from uts_tag t left join uts_user_tag ut on t.id = ut.tag_id left join uts_user u on u.id = ut.user_id
+			where u.id is not null
+		) temp
+		<where>
+			<if test="allMatch != null and allMatch.size() > 0">
+				<foreach collection="allMatch" item="tagName" index="index" separator="and">
+					FIND_IN_SET(#{tagName}, temp.tag_names)
+				</foreach>
+				and
+			</if>
+			<if test="anyMatch != null and anyMatch.size() > 0">
+				temp.tag_name in
+				<foreach collection="anyMatch" item="tagName" index="index" open="(" separator="," close=")">
+					#{tagName}
+				</foreach>
+				and
+			</if>
+			<if test="notMatch != null and notMatch.size() > 0">
+				<foreach collection="notMatch" item="tagName" index="index" separator="and">
+					!FIND_IN_SET(#{tagName}, temp.tag_names)
+				</foreach>
+			</if>
+		</where>
+		order by temp.id ASC
+		limit #{offset}, #{pageSize}
 	</select>
 
 </mapper>

@@ -16,13 +16,10 @@ import java.util.List;
 @Mapper
 public interface UtsUserDao {
 
-	/**
-	 * 分页查询用户
-	 * @param offset
-	 * @param pagesize
-	 * @return
-	 */
-    List<UtsUser> pageList(@Param("offset") int offset,
-                           @Param("pagesize") int pagesize);
+    List<UtsUser> pageList(@Param("allMatch") List<String> allMatch,
+						   @Param("anyMatch") List<String> anyMatch,
+						   @Param("notMatch") List<String> notMatch,
+						   @Param("offset") int offset,
+						   @Param("pageSize") int pageSize);
 
 }

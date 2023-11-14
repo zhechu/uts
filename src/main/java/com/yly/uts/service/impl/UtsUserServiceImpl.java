@@ -22,8 +22,9 @@ public class UtsUserServiceImpl implements UtsUserService {
 	private UtsUserDao utsUserDao;
 
 	@Override
-	public List<UtsUser> pageList(int offset, int pagesize) {
-		return utsUserDao.pageList(offset, pagesize);
+	public List<UtsUser> pageList(List<String> allMatch, List<String> anyMatch, List<String> notMatch, int pageNumber, int pageSize) {
+		int offset = (pageNumber - 1) * pageSize;
+		return utsUserDao.pageList(allMatch, anyMatch, notMatch, offset, pageSize);
 	}
 
 }
