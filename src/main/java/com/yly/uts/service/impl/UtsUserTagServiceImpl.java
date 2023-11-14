@@ -53,7 +53,7 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 		}
 
 		addUserTag(userIds, addTags);
-		removeUserTag(userIds, addTags);
+		removeUserTag(userIds, removeTags);
 
 		return userIds.size();
 	}

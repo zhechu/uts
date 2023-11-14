@@ -38,3 +38,4 @@ INSERT INTO `uts_tag`(`tag_name`) VALUES ('南海');
 INSERT INTO `uts_tag`(`tag_name`) VALUES ('男孩');
 INSERT INTO `uts_tag`(`tag_name`) VALUES ('女孩');
 
+commit;

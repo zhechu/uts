@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class UtsUserTagVdo {
 
-    @NotEmpty(message = "用户不能为空")
+    @NotEmpty(message = "userIds不能为空")
     private List<Integer> userIds;
 
     private List<String> addTags;

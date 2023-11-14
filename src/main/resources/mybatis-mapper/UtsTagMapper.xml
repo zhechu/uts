@@ -26,10 +26,11 @@
 	<select id="listByTagNames" resultMap="UtsTag">
 		SELECT <include refid="Base_Column_List" />
 		FROM uts_tag AS t
-		WHERE t.tag_name in
-		<foreach collection="list" item="tagName" index="index" separator=",">
-			(#{tagName})
-		</foreach>
+		WHERE t.tag_name in (
+			<foreach collection="list" item="tagName" index="index" separator=",">
+				#{tagName}
+			</foreach>
+		)
 	</select>
 
 </mapper>
