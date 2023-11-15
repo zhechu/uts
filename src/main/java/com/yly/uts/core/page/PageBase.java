@@ -37,10 +37,6 @@ public class PageBase implements Serializable {
 
     /**
      * 设置不分页
-     *
-     * @author lingyuwang
-     * @date 2020-01-11 10:48
-     * @since 1.0.4
      */
     public void setNoPage() {
         this.pageNumber = -1;
@@ -49,11 +45,7 @@ public class PageBase implements Serializable {
 
     /**
      * 是否分页
-     *
-     * @return boolean
-     * @author lingyuwang
-     * @date 2020-01-11 12:31
-     * @since 1.0.4
+     * @return
      */
     public boolean isNoPage() {
         return this.pageNumber != null && this.pageNumber == -1

@@ -1,5 +1,5 @@
 
--- 添加存储过程添加10000条用户测试数据
+-- 创建存储过程添加10000条用户测试数据
 DROP PROCEDURE IF EXISTS create_uts_user_test_data_proc;
 DELIMITER $$
 SET AUTOCOMMIT = 0$$
@@ -25,7 +25,7 @@ DROP PROCEDURE IF EXISTS create_uts_user_test_data_proc;
 
 
 
--- 添加化标签测试数据
+-- 添加标签测试数据
 INSERT INTO `uts_tag`(`tag_name`) VALUES ('女性');
 INSERT INTO `uts_tag`(`tag_name`) VALUES ('男性');
 INSERT INTO `uts_tag`(`tag_name`) VALUES ('活跃');

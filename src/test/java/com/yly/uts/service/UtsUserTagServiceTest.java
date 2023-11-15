@@ -1,6 +1,5 @@
 package com.yly.uts.service;
 
-import com.yly.uts.core.model.UtsUser;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +13,10 @@ public class UtsUserTagServiceTest {
     @Autowired
     private UtsUserTagService utsUserTagService;
 
+    /**
+     * 测试使用多线程同时对用户批量进行打标签和移除标签
+     * @throws InterruptedException
+     */
     @Test
     public void updateUserTag() throws InterruptedException {
         for (int i = 0; i < 100; i++) {
@@ -33,11 +36,11 @@ public class UtsUserTagServiceTest {
             userIds.add(i);
         }
         List<String> addTags = new ArrayList<>();
-        addTags.add("玉儿");
-        addTags.add("月儿");
-        addTags.add("活三跃");
+        addTags.add("二元");
+        addTags.add("老号");
+        addTags.add("越跃");
         List<String> removeTags = new ArrayList<>();
-        removeTags.add("洱东海");
+        removeTags.add("临淄");
         removeTags.add("山东");
         utsUserTagService.updateUserTag(userIds, addTags, removeTags);
     }

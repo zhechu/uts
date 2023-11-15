@@ -13,7 +13,6 @@
 		t.tag_name
 	</sql>
 
-	<!-- 批量添加，有冲突则跳过 -->
 	<insert id="batchSave" parameterType="java.util.List">
 		insert into uts_tag (
 			tag_name

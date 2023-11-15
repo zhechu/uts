@@ -8,13 +8,6 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-/**
- * 用户服务实现
- *
- * @author lingyuwang
- * @date 2023-11-14 4:51 上午
- * @since 0.0.1
- */
 @Service
 public class UtsUserServiceImpl implements UtsUserService {
 

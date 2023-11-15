@@ -4,8 +4,10 @@ import com.yly.uts.core.model.UtsTag;
 import com.yly.uts.core.model.UtsUserTag;
 import com.yly.uts.dao.UtsTagDao;
 import com.yly.uts.dao.UtsUserTagDao;
+import com.yly.uts.service.UtsTagService;
 import com.yly.uts.service.UtsUserTagService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -13,20 +15,13 @@ import org.springframework.util.CollectionUtils;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-/**
- * 用户服务实现
- *
- * @author lingyuwang
- * @date 2023-11-14 4:51 上午
- * @since 0.0.1
- */
 @Service
 @Slf4j
 public class UtsUserTagServiceImpl implements UtsUserTagService {
+
+	@Autowired
+	private UtsTagService utsTagService;
 
 	@Resource
 	private UtsTagDao utsTagDao;
@@ -41,25 +36,9 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 			return 0;
 		}
 
-		if (!CollectionUtils.isEmpty(addTags)) {
-			// 获取还未添加到标签库的标签
-			List<UtsTag> tagRecords = utsTagDao.listByTagNames(addTags);
-			List<String> tagNameRecords = tagRecords.stream().map(tagRecord -> tagRecord.getTagName()).collect(Collectors.toList());
-			addTags = addTags.stream().filter(tag -> !tagNameRecords.contains(tag)).collect(Collectors.toList());
-
-			// 批量添加标签，若已存在，则跳过
-			List<UtsTag> tags = addTags.stream().filter(Objects::nonNull)
-					.map(o -> {
-						UtsTag utsTag = new UtsTag();
-						utsTag.setTagName(o);
-						return utsTag;
-					})
-					.collect(Collectors.toList());
-			if (!CollectionUtils.isEmpty(tags)) {
-				int batchSaveResult = utsTagDao.batchSave(tags);
-				log.info("batchSaveResult:{}", batchSaveResult);
-			}
-		}
+		// 批量添加标签，若已存在，则跳过
+		int batchSaveResult =utsTagService.batchSave(addTags);
+		log.info("batchSaveResult:{}", batchSaveResult);
 
 		// 批量添加用户标签，若已存在，则跳过
 		int addUserTagResult = addUserTag(userIds, addTags);

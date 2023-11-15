@@ -25,11 +25,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 其它所有异常处理
-     *
      * @param e
-     * @return com.qiaoku.res.Response
-     * @author lingyuwang
-     * @date 2019/12/21 11:12
+     * @return
      */
     @ExceptionHandler(value = Exception.class)
     public ReturnT exceptionHandler(Exception e) {
@@ -85,11 +82,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 参数属性缺失异常处理
-     *
      * @param e
-     * @return com.qiaoku.res.Response
-     * @author lingyuwang
-     * @date 2019/12/21 11:13
+     * @return
      */
     @ExceptionHandler(value = MissingServletRequestParameterException.class)
     public ReturnT missingServletRequestParameterException(MissingServletRequestParameterException e) {
@@ -100,11 +94,8 @@ public class GlobalExceptionHandler {
 
     /**
      * 请求参数转换异常
-     *
      * @param httpMessageNotReadableException
-     * @return com.qiaoku.res.Response
-     * @author lingyuwang
-     * @date 2019/12/21 11:16
+     * @return
      */
     @ExceptionHandler(value = HttpMessageNotReadableException.class)
     public ReturnT httpMessageNotReadableException(HttpMessageNotReadableException httpMessageNotReadableException) {
