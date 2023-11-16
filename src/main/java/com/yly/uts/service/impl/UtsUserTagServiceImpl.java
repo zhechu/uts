@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,10 +22,10 @@ public class UtsUserTagServiceImpl implements UtsUserTagService {
 	@Autowired
 	private UtsTagService utsTagService;
 
-	@Resource
+	@Autowired
 	private UtsTagDao utsTagDao;
 
-	@Resource
+	@Autowired
 	private UtsUserTagDao utsUserTagDao;
 
 	@Transactional(rollbackFor = Exception.class)

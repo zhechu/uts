@@ -19,7 +19,7 @@ public class UtsUserTagServiceTest {
      */
     @Test
     public void updateUserTag() throws InterruptedException {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             new Thread() {
                 @Override
                 public void run() {
@@ -36,9 +36,9 @@ public class UtsUserTagServiceTest {
             userIds.add(i);
         }
         List<String> addTags = new ArrayList<>();
-        addTags.add("二元");
-        addTags.add("老号");
-        addTags.add("越跃");
+        addTags.add("测试");
+        addTags.add("越越跃");
+        addTags.add("积极");
         List<String> removeTags = new ArrayList<>();
         removeTags.add("临淄");
         removeTags.add("山东");

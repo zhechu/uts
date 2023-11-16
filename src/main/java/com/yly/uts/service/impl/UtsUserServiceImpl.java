@@ -3,15 +3,15 @@ package com.yly.uts.service.impl;
 import com.yly.uts.core.model.UtsUser;
 import com.yly.uts.dao.UtsUserDao;
 import com.yly.uts.service.UtsUserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class UtsUserServiceImpl implements UtsUserService {
 
-	@Resource
+	@Autowired
 	private UtsUserDao utsUserDao;
 
 	@Override

@@ -1,18 +1,13 @@
 package com.yly.uts.service.impl;
 
 import com.yly.uts.core.model.UtsTag;
-import com.yly.uts.core.model.UtsUserTag;
 import com.yly.uts.dao.UtsTagDao;
-import com.yly.uts.dao.UtsUserTagDao;
 import com.yly.uts.service.UtsTagService;
-import com.yly.uts.service.UtsUserTagService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -21,7 +16,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class UtsTagServiceImpl implements UtsTagService {
 
-	@Resource
+	@Autowired
 	private UtsTagDao utsTagDao;
 
 	@Override
@@ -47,7 +42,6 @@ public class UtsTagServiceImpl implements UtsTagService {
 			return 0;
 		}
 
-		// TODO 可能存在标签名称冲突异常，可用重试解决
 		return utsTagDao.batchSave(tags);
 	}
 
