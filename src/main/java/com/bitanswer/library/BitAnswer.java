@@ -294,7 +294,65 @@ public class BitAnswer {
     * Instantiates a new BitAnswer.
     */
    public BitAnswer() {
+      String os = System.getProperty("os.name");
+      String arch = System.getProperties().getProperty("os.arch");
 
+      /* windows library loading */
+      String fileName = "";
+      if (os.indexOf("Windows") >= 0) {
+         if (arch.compareToIgnoreCase("x86") == 0) {
+            fileName = RUNTIME_LIBRARY_DEFAULT;
+         }
+         else if (arch.compareToIgnoreCase("amd64") == 0) {
+            fileName = RUNTIME_LIBRARY_DEFAULT_X64;
+         }
+         else {
+            fileName = RUNTIME_LIBRARY_DEFAULT;
+         }
+      }
+      else if (os.indexOf("Linux") >= 0) {
+         if (arch.compareToIgnoreCase("x86") == 0) {
+            fileName = LINUX_LIBRARY_DEFAULT;
+         }
+         else if (arch.compareToIgnoreCase("amd64") == 0) {
+            fileName = LINUX_LIBRARY_DEFAULT_X64;
+         }
+         else {
+            fileName = LINUX_LIBRARY_DEFAULT;
+         }
+      }
+
+      if (fileName.length() < 1) {
+         throw new RuntimeException("The file name cannot be empty");
+      }
+      int extIndex = fileName.indexOf(".");
+      if (extIndex < 1) {
+         throw new RuntimeException("The file name must contain an extension");
+      }
+
+      try {
+         File file = File.createTempFile(fileName.substring(0, extIndex), fileName.substring(extIndex));
+         if (!file.exists()) {
+            throw new RuntimeException("Failed to create temporary file");
+         }
+         InputStream link = BitAnswer.class.getResourceAsStream("/bin/" + fileName);
+
+         // 复制 resource 下的外部库文件到临时文件
+         Files.copy(
+                 link,
+                 file.getAbsoluteFile().toPath(),
+                 StandardCopyOption.REPLACE_EXISTING);
+         fileName = file.getAbsoluteFile().toPath().toString();
+
+         System.load(fileName);
+
+         // 删除临时文件
+         file.delete();
+      } catch (IOException e) {
+         throw new RuntimeException(e);
+      }
+
+      log.info("load {} success", fileName);
    }
 
    /**
@@ -311,6 +369,10 @@ public class BitAnswer {
    public void login(String url, String sn, LoginMode mode) throws BitAnswerException {
       long[] handles = new long[1];
       int status = Bit_Login(url, sn, APPLICATION_DATA, handles, mode.getValue());
+      log.info("status:{}", status);
+      for (int i = 0; i < handles.length; i++) {
+         log.info("hadles:{}", handles[i]);
+      }
       if (status != 0) {
          throw new BitAnswerException(status);
       }
