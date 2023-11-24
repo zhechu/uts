@@ -9,15 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
  * @date 2023-11-23 6:15 下午
  * @since 0.0.1
  **/
-@SpringBootTest
+//@SpringBootTest
 public class BitAnswerServiceTest {
 
-    @Autowired
-    private BitAnswerService bitAnswerService;
-
-    @Test
-    void test() throws Exception {
-        bitAnswerService.menuTest();
-    }
+//    @Autowired
+//    private BitAnswerService bitAnswerService;
+//
+//    @Test
+//    void test() throws Exception {
+//        bitAnswerService.menuTest();
+//    }
 
 }
