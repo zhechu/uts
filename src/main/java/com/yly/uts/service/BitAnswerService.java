@@ -16,12 +16,17 @@ import javax.annotation.PostConstruct;
 public class BitAnswerService {
 
     @PostConstruct
-    public void menuTest() throws BitAnswer.BitAnswerException {
+    public void menuTest() {
         log.info("Bitanswer client library sample for Java.");
         log.info("http://www.bitanswer.cn");
 
         BitAnswer bitAnswer = new BitAnswer();
-        bitAnswer.login(null, "Q3KZ5JLF5IXDNCLG", BitAnswer.LoginMode.AUTO);
+        try {
+            bitAnswer.login(null, "Q3KZ5JLF5IXDNCLG", BitAnswer.LoginMode.AUTO);
+        } catch (BitAnswer.BitAnswerException e) {
+            log.error("Bit授权错误码:{}", e.getErrorCode());
+            throw new RuntimeException(e);
+        }
         log.info("Login success.");
 
         log.info("\nProgram exit.");
