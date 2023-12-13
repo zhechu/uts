@@ -8,8 +8,14 @@ import java.util.List;
 @Mapper
 public interface UtsTagDao {
 
-	int batchSave(List<UtsTag> utsTags);
+	List<UtsTag> selectAll();
 
-	List<UtsTag> listByTagNames(List<String> utsTagNames);
+	List<UtsTag> selectBlockDataJson();
+
+	List<UtsTag> selectBlockData();
+
+	int updateById(String id, byte[] blockData);
+
+	int updateBlockDataJsonById(String id, String blockDataJson);
 
 }

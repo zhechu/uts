@@ -5,14 +5,10 @@ import lombok.Data;
 @Data
 public class UtsTag {
 
-    /**
-     * 标签id
-     */
-    private Integer id;
+    private String id;
 
-    /**
-     * 标签名
-     */
-    private String tagName;
+    private String blockDataJson;
+
+    private byte[] blockData;
 
 }

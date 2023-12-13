@@ -4,32 +4,29 @@
 <mapper namespace="com.yly.uts.dao.UtsTagDao">
 
 	<resultMap id="UtsTag" type="com.yly.uts.core.model.UtsTag" >
-		<result column="id" property="id" />
-		<result column="tag_name" property="tagName" />
+		<result column="F_Id" property="id" />
+		<result column="block_data" property="blockData" />
+		<result column="block_data_json" property="blockDataJson" />
 	</resultMap>
 
-	<sql id="Base_Column_List">
-		t.id,
-		t.tag_name
-	</sql>
-
-	<insert id="batchSave" parameterType="java.util.List">
-		insert into uts_tag (
-			tag_name
-		) values
-		<foreach collection="list" item="model" index="index" separator=",">
-			(#{model.tagName})
-		</foreach>
-	</insert>
-
-	<select id="listByTagNames" resultMap="UtsTag">
-		SELECT <include refid="Base_Column_List" />
-		FROM uts_tag AS t
-		WHERE t.tag_name in (
-			<foreach collection="list" item="tagName" index="index" separator=",">
-				#{tagName}
-			</foreach>
-		)
+	<select id="selectAll" resultMap="UtsTag">
+		SELECT f_id, block_data_json, block_data FROM hpd_calculation_process_tmp
 	</select>
+
+	<select id="selectBlockDataJson" resultMap="UtsTag">
+		SELECT f_id, block_data_json FROM hpd_calculation_process_tmp
+	</select>
+
+	<select id="selectBlockData" resultMap="UtsTag">
+		SELECT f_id, block_data FROM hpd_calculation_process_tmp
+	</select>
+
+	<update id="updateById">
+		update hpd_calculation_process_tmp set block_data = #{blockData} where F_Id = #{id}
+	</update>
+
+	<update id="updateBlockDataJsonById">
+		update hpd_calculation_process_tmp set block_data_json = #{blockDataJson} where F_Id = #{id}
+	</update>
 
 </mapper>
