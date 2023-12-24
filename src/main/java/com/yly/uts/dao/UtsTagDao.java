@@ -8,6 +8,10 @@ import java.util.List;
 @Mapper
 public interface UtsTagDao {
 
+	List<UtsTag> selectAllId();
+
+	UtsTag getById(String id);
+
 	List<UtsTag> selectAll();
 
 	List<UtsTag> selectBlockDataJson();

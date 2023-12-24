@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yly.uts.dao.BigDataDao">
+
+	<resultMap id="BigData" type="com.yly.uts.core.model.BigData" >
+		<result column="F_Id" property="id" />
+		<result column="block_data_json_gzip" property="blockDataJsonGzip" />
+		<result column="block_data_json" property="blockDataJson" />
+	</resultMap>
+
+	<select id="selectAllId" resultMap="BigData">
+		SELECT f_id FROM ${tableName}
+	</select>
+
+	<select id="getById" resultMap="BigData">
+		SELECT f_id, block_data_json, block_data_json_gzip FROM ${tableName} where f_id = #{id}
+	</select>
+
+	<update id="updateById">
+		update ${tableName} set block_data_json_gzip = #{blockDataJsonGzip} where F_Id = #{id}
+	</update>
+
+	<update id="updateBlockDataJsonById">
+		update ${tableName} set block_data_json = #{blockDataJson} where F_Id = #{id}
+	</update>
+
+</mapper>

@@ -5,28 +5,66 @@
 
 	<resultMap id="UtsTag" type="com.yly.uts.core.model.UtsTag" >
 		<result column="F_Id" property="id" />
-		<result column="block_data" property="blockData" />
+		<result column="block_data_json_gzip" property="blockData" />
 		<result column="block_data_json" property="blockDataJson" />
 	</resultMap>
 
+	<select id="selectAllId" resultMap="UtsTag">
+		SELECT f_id FROM hpd_calculation_process
+	</select>
+
+	<select id="getById" resultMap="UtsTag">
+		SELECT f_id, block_data_json, block_data_json_gzip FROM hpd_calculation_process where f_id = #{id}
+	</select>
+
 	<select id="selectAll" resultMap="UtsTag">
-		SELECT f_id, block_data_json, block_data FROM hpd_calculation_process_tmp
+		SELECT f_id, block_data_json, block_data_json_gzip FROM hpd_calculation_process
 	</select>
 
 	<select id="selectBlockDataJson" resultMap="UtsTag">
-		SELECT f_id, block_data_json FROM hpd_calculation_process_tmp
+		SELECT f_id, block_data_json FROM hpd_calculation_process
 	</select>
 
 	<select id="selectBlockData" resultMap="UtsTag">
-		SELECT f_id, block_data FROM hpd_calculation_process_tmp
+		SELECT f_id, block_data_json_gzip FROM hpd_calculation_process
 	</select>
 
 	<update id="updateById">
-		update hpd_calculation_process_tmp set block_data = #{blockData} where F_Id = #{id}
+		update hpd_calculation_process set block_data_json_gzip = #{blockData} where F_Id = #{id}
 	</update>
 
 	<update id="updateBlockDataJsonById">
-		update hpd_calculation_process_tmp set block_data_json = #{blockDataJson} where F_Id = #{id}
+		update hpd_calculation_process set block_data_json = #{blockDataJson} where F_Id = #{id}
 	</update>
+<!--
+
+	<select id="selectAllId" resultMap="UtsTag">
+		SELECT f_id FROM hpd_calculation_process_detail
+	</select>
+
+	<select id="getById" resultMap="UtsTag">
+		SELECT f_id, block_data_json, block_data_json_gzip FROM hpd_calculation_process_detail where f_id = #{id}
+	</select>
+
+	<select id="selectAll" resultMap="UtsTag">
+		SELECT f_id, block_data_json, block_data_json_gzip FROM hpd_calculation_process_detail
+	</select>
+
+	<select id="selectBlockDataJson" resultMap="UtsTag">
+		SELECT f_id, block_data_json FROM hpd_calculation_process_detail
+	</select>
+
+	<select id="selectBlockData" resultMap="UtsTag">
+		SELECT f_id, block_data_json_gzip FROM hpd_calculation_process_detail
+	</select>
+
+	<update id="updateById">
+		update hpd_calculation_process_detail set block_data_json_gzip = #{blockData} where F_Id = #{id}
+	</update>
+
+	<update id="updateBlockDataJsonById">
+		update hpd_calculation_process_detail set block_data_json = #{blockDataJson} where F_Id = #{id}
+	</update>
+-->
 
 </mapper>
