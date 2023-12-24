@@ -1,10 +1,7 @@
 package com.yly.uts.service;
 
 import cn.hutool.core.collection.CollectionUtil;
-import cn.hutool.core.net.URLDecoder;
-import cn.hutool.core.util.ZipUtil;
 import com.yly.uts.core.model.BigData;
-import com.yly.uts.core.model.UtsTag;
 import com.yly.uts.dao.BigDataDao;
 import com.yly.uts.util.PakoGzipUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -13,10 +10,7 @@ import org.junit.platform.commons.util.StringUtils;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 @SpringBootTest

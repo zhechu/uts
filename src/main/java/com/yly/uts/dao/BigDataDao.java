@@ -1,7 +1,6 @@
 package com.yly.uts.dao;
 
 import com.yly.uts.core.model.BigData;
-import com.yly.uts.core.model.UtsTag;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
