@@ -93,7 +93,7 @@ public class BigDataTest {
     @Test
     public void getBlockDataJson() {
         String tableName = TABLE_NAME;
-        BigData bigData = bigDataDao.getById(tableName,"1729763934858149890");
+        BigData bigData = bigDataDao.getById(tableName,"1714129164501544962");
         byte[] blockDataJsonGzip = bigData.getBlockDataJsonGzip();
         String blockDataJson = PakoGzipUtils.byteArrayToJson(blockDataJsonGzip);
         log.info("blockDataJson:{}", blockDataJson);
